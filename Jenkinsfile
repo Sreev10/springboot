@@ -7,12 +7,12 @@ pipeline {
     }
 
     stages {
-
         stage('Clone Code') {
-            steps {
-                git 'https://github.com/Sreev10/springboot.git'
-            }
-        }
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/Sreev10/springboot.git'
+    }
+}
 
         stage('Build Maven') {
             steps {
