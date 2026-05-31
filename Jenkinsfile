@@ -46,25 +46,27 @@ pipeline {
         }
 
         stage('Deploy to Minikube') {
-    steps {
+            steps {
 
-        sshagent(['minikube-ssh']) {
+                sshagent(['minikube-ssh']) {
 
-            sh '''
-            scp -o StrictHostKeyChecking=no \
-            k8s/*.yaml \
-            ec2-user@3.237.64.154:/home/ec2-user/k8s/
+                    sh '''
+                    scp -o StrictHostKeyChecking=no \
+                    k8s/*.yaml \
+                    ec2-user@3.237.64.154:/home/ec2-user/k8s/
 
-            ssh -o StrictHostKeyChecking=no \
-            ec2-user@3.237.64.154 << EOF
+                    ssh -o StrictHostKeyChecking=no \
+                    ec2-user@3.237.64.154 << EOF
 
-            kubectl apply -f /home/ec2-user/k8s/deployment.yaml
-            kubectl apply -f /home/ec2-user/k8s/service.yaml
+                    kubectl apply -f /home/ec2-user/k8s/deployment.yaml
+                    kubectl apply -f /home/ec2-user/k8s/service.yaml
 
-            kubectl rollout restart deployment springboot-demo
+                    kubectl rollout restart deployment springboot-demo
 
-            EOF
-            '''
+                    EOF
+                    '''
+                }
+            }
         }
     }
-}
+}  
