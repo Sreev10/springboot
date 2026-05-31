@@ -1,15 +1,15 @@
 pipeline {
 
     environment {
-        DOCKER_IMAGE = "YOUR_DOCKERHUB_USERNAME/springboot-demo"
-        MINIKUBE_SERVER = "ec2-user@MINIKUBE_PUBLIC_IP"
+        DOCKER_IMAGE = "sreevastava/springboot-demo"
+        MINIKUBE_SERVER = "ec2-user@3.237.64.154"
     }
 
     stages {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/springboot-devops-demo.git'
+                git 'https://github.com/Sreev10/springboot.git'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'dockerhub-creds',
+                        credentialsId: 'docker',
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_PASS'
                     )
