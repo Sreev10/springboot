@@ -49,7 +49,7 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
 
-                sshagent(['minikube-ssh']) {
+                sshagent(['minikube']) {
 
                     sh '''
                     scp -o StrictHostKeyChecking=no \
